@@ -6,6 +6,8 @@ then
   check_dir=/deploy/setup
 fi
 
+echo $check_dir
+
 deploy_uid=$(stat -c '%u' $check_dir)
 deploy_gid=$(stat -c '%g' $check_dir)
 
@@ -13,6 +15,11 @@ trame_user_uid=$(id -u trame-user)
 trame_user_gid=$(id -g trame-user)
 
 run_chown=false
+echo $deploy_uid
+echo $trame_user_uid
+
+echo $deploy_gid
+echo $trame_user_gid
 if [[ "$deploy_uid" != "$trame_user_uid" ]]; then
   usermod --uid $deploy_uid trame-user
   run_chown=true

@@ -36,6 +36,9 @@ fi
 
 echo -e "$OUTPUT" > "${LAUNCHER_PATH}"
 
+bash /usr/local/bin/httpd-foreground &
+
 # Run the launcher in the foreground so this script doesn't end
 echo "Starting the wslink launcher at"
+
 python -m wslink.launcher ${LAUNCHER_PATH}

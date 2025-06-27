@@ -10,7 +10,6 @@ fi
 /opt/trame/fix_uid_gid.sh
 
 # Ensure the needed directories exist
-gosu trame-user /opt/trame/make_directories.sh
 
 # Restart apache
-service apache2 restart
+# service apache2 restart

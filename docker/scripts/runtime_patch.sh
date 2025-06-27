@@ -35,7 +35,7 @@ if [[ -n "$TRAME_URL_PREFIX" ]]
 then
     # Fix Apache
     TEMPLATE_INPUT=/opt/trame/apache.tpl
-    CONFIG_OUTPUT=/etc/apache2/sites-available/001-trame.conf
+    CONFIG_OUTPUT=/usr/local/apache2/conf/vhosts/001-trame.conf
 
     OUTPUT=$(<"${TEMPLATE_INPUT}")
 
@@ -43,7 +43,8 @@ then
     OUTPUT="${OUTPUT//$REPLACEMENT_STRING/$TRAME_URL_PREFIX}"
     echo -e "$OUTPUT" > "${CONFIG_OUTPUT}"
 
-    service apache2 restart
+    echo restarting apache2
+    # service apache2 restart
 
     # Fix index.html <base href=".">
     FILE_TO_PATCH=/deploy/server/www/index.html
@@ -53,3 +54,5 @@ then
     OUTPUT="${OUTPUT//$BASE_OLD/$BASE_NEW}"
     echo -e "$OUTPUT" > "${FILE_TO_PATCH}"
 fi
+
+echo "end runtime patch"

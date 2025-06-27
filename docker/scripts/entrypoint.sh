@@ -13,11 +13,13 @@ if [[ "$1" == "build" ]]; then
   # Forward all arguments after `build`, so the user can pass things
   # like `www venv launcher` etc.
   echo "Running build..."
+  gosu trame-user /opt/trame/make_directories.sh
+
   gosu trame-user /opt/trame/build.sh ${@:2}
   echo "Build complete"
 else
   # Start the server
   /opt/trame/runtime_patch.sh
   echo "Starting server..."
-  gosu trame-user /opt/trame/run.sh
+  /opt/trame/run.sh
 fi
